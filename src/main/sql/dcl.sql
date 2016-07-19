@@ -1,0 +1,8 @@
+GRANT USAGE ON SCHEMA common TO catalog;
+GRANT USAGE ON SCHEMA game TO catalog;
+GRANT USAGE ON SCHEMA film TO catalog;
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON common.user TO catalog;
+GRANT SELECT, INSERT, UPDATE, DELETE ON common.media TO catalog;
+GRANT SELECT, INSERT, UPDATE, DELETE ON game.series TO catalog;
+GRANT SELECT, INSERT, UPDATE, DELETE ON game.element TO catalog;
