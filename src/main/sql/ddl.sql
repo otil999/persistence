@@ -1,28 +1,11 @@
-CREATE ROLE catalog LOGIN PASSWORD 'catalog';
-
-CREATE SCHEMA private;
-CREATE SCHEMA common;
-CREATE SCHEMA game;
-CREATE SCHEMA film;
- 
-DROP TABLE private.base;
-CREATE TABLE private.base (
-    create_user INTEGER,
-    modify_user INTEGER,
-    delete_user INTEGER,
-    create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    modify_time TIMESTAMP,
-    delete_time TIMESTAMP
-);
-
-DROP TABLE private.element;
-CREATE TABLE private.element (
+DROP TABLE movie;
+CREATE TABLE IF NOT EXISTS movie (
     name    TEXT,
     counter SMALLINT DEFAULT 0,
     rating  SMALLINT DEFAULT 0,
     release SMALLINT,
     link    TEXT,
-    LIKE private.base INCLUDING DEFAULTS
+    ts      TEXT
 );
 
 DROP TABLE common.user;
