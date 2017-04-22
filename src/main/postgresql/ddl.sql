@@ -1,11 +1,28 @@
-DROP TABLE movie;
-CREATE TABLE IF NOT EXISTS movie (
+CREATE ROLE catalog LOGIN PASSWORD 'catalog';
+
+CREATE SCHEMA private;
+CREATE SCHEMA common;
+CREATE SCHEMA game;
+CREATE SCHEMA film;
+
+DROP TABLE private.base;
+CREATE TABLE private.base (
+    create_user INTEGER,
+    modify_user INTEGER,
+    delete_user INTEGER,
+    create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    modify_time TIMESTAMP,
+    delete_time TIMESTAMP
+);
+
+DROP TABLE private.element;
+CREATE TABLE private.element (
     name    TEXT,
     counter SMALLINT DEFAULT 0,
     rating  SMALLINT DEFAULT 0,
     release SMALLINT,
     link    TEXT,
-    ts      TEXT
+    LIKE private.base INCLUDING DEFAULTS
 );
 
 DROP TABLE common.user;
@@ -27,7 +44,7 @@ ALTER TABLE common.media ADD CONSTRAINT media_create_user_user_user_id_key FOREI
 ALTER TABLE common.media ADD CONSTRAINT media_modify_user_user_user_id_key FOREIGN KEY (modify_user) REFERENCES common.user(user_id) ON UPDATE CASCADE;
 ALTER TABLE common.media ADD CONSTRAINT media_delete_user_user_user_id_key FOREIGN KEY (delete_user) REFERENCES common.user(user_id) ON UPDATE CASCADE;
 
-DROP TABLE game.series; 
+DROP TABLE game.series;
 CREATE TABLE game.series (
     series_id BIGSERIAL PRIMARY KEY,
     name      TEXT      UNIQUE NOT NULL,
@@ -37,7 +54,7 @@ ALTER TABLE game.series ADD CONSTRAINT series_cuser_user_user_id_key FOREIGN KEY
 ALTER TABLE game.series ADD CONSTRAINT series_muser_user_user_id_key FOREIGN KEY (modify_user) REFERENCES common.user(user_id) ON UPDATE CASCADE;
 ALTER TABLE game.series ADD CONSTRAINT series_duser_user_user_id_key FOREIGN KEY (delete_user) REFERENCES common.user(user_id) ON UPDATE CASCADE;
 
-DROP TABLE game.element; 
+DROP TABLE game.element;
 CREATE TABLE game.element (
     element_id BIGSERIAL PRIMARY KEY,
     media_id   BIGINT    REFERENCES common.media ON UPDATE CASCADE ON DELETE RESTRICT,
