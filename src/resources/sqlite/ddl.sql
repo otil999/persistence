@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS movie (
     link          TEXT,
     media_id      INTEGER NOT NULL,
     series_id     INTEGER,
+    series_num    INTEGER DEFAULT 1,
     genre_id      INTEGER,
     timestamp     TEXT NOT NULL DEFAULT (datetime('now', 'localtime')),
     FOREIGN KEY (media_id) REFERENCES media(id),
