@@ -56,3 +56,21 @@ CREATE TABLE IF NOT EXISTS game (
     FOREIGN KEY (series_id) REFERENCES series(id),
     FOREIGN KEY (genre_id) REFERENCES genre(id)
 );
+
+CREATE VIEW random_game AS
+	SELECT game.id, series.name, game.name, counter
+	FROM game LEFT JOIN series ON (game.series_id = series.id)
+	WHERE counter = (SELECT min(counter) FROM game)
+	LIMIT 1
+	OFFSET (SELECT abs(random()) % count(*)
+	        FROM game
+	        WHERE counter = (SELECT min(counter) FROM game));
+
+CREATE VIEW random_movie AS
+	SELECT movie.id, series.name, movie.name, counter
+	FROM movie LEFT JOIN series ON (movie.series_id = series.id)
+	WHERE counter = (SELECT min(counter) FROM movie)
+	LIMIT 1
+	OFFSET (SELECT abs(random()) % count(*)
+	        FROM movie
+	        WHERE counter = (SELECT min(counter) FROM movie));
