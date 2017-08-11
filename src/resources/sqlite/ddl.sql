@@ -52,6 +52,8 @@ CREATE TABLE IF NOT EXISTS game (
     series_num    INTEGER DEFAULT 1,
     genre_id      INTEGER,
     timestamp     TEXT NOT NULL DEFAULT (datetime('now', 'localtime')),
+    long_term     INTEGER NOT NULL DEFAULT 0,
+    description   TEXT,
     FOREIGN KEY (media_id) REFERENCES media(id),
     FOREIGN KEY (series_id) REFERENCES series(id),
     FOREIGN KEY (genre_id) REFERENCES genre(id)
