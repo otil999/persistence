@@ -5,6 +5,12 @@ CREATE TABLE IF NOT EXISTS media (
     timestamp TEXT NOT NULL DEFAULT (datetime('now', 'localtime'))
 );
 
+DROP TRIGGER media_after_tr;
+CREATE TRIGGER media_after_tr AFTER UPDATE ON media WHEN NEW.timestamp == OLD.timestamp
+BEGIN
+	UPDATE media SET timestamp = datetime('now', 'localtime') WHERE id = NEW.id;
+END;
+
 DROP TABLE series;
 CREATE TABLE IF NOT EXISTS series (
     id        INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -12,12 +18,24 @@ CREATE TABLE IF NOT EXISTS series (
     timestamp TEXT NOT NULL DEFAULT (datetime('now', 'localtime'))
 );
 
+DROP TRIGGER series_after_tr;
+CREATE TRIGGER series_after_tr AFTER UPDATE ON series WHEN NEW.timestamp == OLD.timestamp
+BEGIN
+	UPDATE series SET timestamp = datetime('now', 'localtime') WHERE id = NEW.id;
+END;
+
 DROP TABLE genre;
 CREATE TABLE IF NOT EXISTS genre (
     id        INTEGER PRIMARY KEY AUTOINCREMENT,
     name      TEXT UNIQUE NOT NULL,
     timestamp TEXT NOT NULL DEFAULT (datetime('now', 'localtime'))
 );
+
+DROP TRIGGER genre_after_tr;
+CREATE TRIGGER genre_after_tr AFTER UPDATE ON genre WHEN NEW.timestamp == OLD.timestamp
+BEGIN
+	UPDATE genre SET timestamp = datetime('now', 'localtime') WHERE id = NEW.id;
+END;
 
 DROP TABLE movie;
 CREATE TABLE IF NOT EXISTS movie (
@@ -39,6 +57,12 @@ CREATE TABLE IF NOT EXISTS movie (
     FOREIGN KEY (genre_id) REFERENCES genre(id)
 );
 
+DROP TRIGGER movie_after_tr;
+CREATE TRIGGER movie_after_tr AFTER UPDATE ON movie WHEN NEW.timestamp == OLD.timestamp
+BEGIN
+	UPDATE movie SET timestamp = datetime('now', 'localtime') WHERE id = NEW.id;
+END;
+
 DROP TABLE game; 
 CREATE TABLE IF NOT EXISTS game (
     id            INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -58,6 +82,12 @@ CREATE TABLE IF NOT EXISTS game (
     FOREIGN KEY (series_id) REFERENCES series(id),
     FOREIGN KEY (genre_id) REFERENCES genre(id)
 );
+
+DROP TRIGGER game_after_tr;
+CREATE TRIGGER game_after_tr AFTER UPDATE ON game WHEN NEW.timestamp == OLD.timestamp
+BEGIN
+	UPDATE game SET timestamp = datetime('now', 'localtime') WHERE id = NEW.id;
+END;
 
 CREATE VIEW random_game AS
 	SELECT game.id, series.name, game.name, counter
