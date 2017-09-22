@@ -1,3 +1,4 @@
+-- media
 DROP TABLE media;
 CREATE TABLE IF NOT EXISTS media (
     id        INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -11,6 +12,7 @@ BEGIN
 	UPDATE media SET timestamp = datetime('now', 'localtime') WHERE id = NEW.id;
 END;
 
+-- series
 DROP TABLE series;
 CREATE TABLE IF NOT EXISTS series (
     id        INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -24,6 +26,7 @@ BEGIN
 	UPDATE series SET timestamp = datetime('now', 'localtime') WHERE id = NEW.id;
 END;
 
+-- genre
 DROP TABLE genre;
 CREATE TABLE IF NOT EXISTS genre (
     id        INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -37,6 +40,7 @@ BEGIN
 	UPDATE genre SET timestamp = datetime('now', 'localtime') WHERE id = NEW.id;
 END;
 
+-- movie
 DROP TABLE movie;
 CREATE TABLE IF NOT EXISTS movie (
     id            INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -63,6 +67,7 @@ BEGIN
 	UPDATE movie SET timestamp = datetime('now', 'localtime') WHERE id = NEW.id;
 END;
 
+-- game
 DROP TABLE game; 
 CREATE TABLE IF NOT EXISTS game (
     id            INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -89,6 +94,7 @@ BEGIN
 	UPDATE game SET timestamp = datetime('now', 'localtime') WHERE id = NEW.id;
 END;
 
+-- views for random selections
 CREATE VIEW random_game AS
 	SELECT game.id, series.name, game.name, counter
 	FROM game LEFT JOIN series ON (game.series_id = series.id)
