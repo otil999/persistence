@@ -1,3 +1,6 @@
+--
+-- SQLite database definition to store backup data from postgresql
+--
 -- media
 DROP TABLE media;
 CREATE TABLE IF NOT EXISTS media (
@@ -68,7 +71,7 @@ BEGIN
 END;
 
 -- game
-DROP TABLE game; 
+DROP TABLE game;
 CREATE TABLE IF NOT EXISTS game (
     id            INTEGER PRIMARY KEY AUTOINCREMENT,
     name          TEXT UNIQUE NOT NULL,
