@@ -1,2 +1,3 @@
 # pycharm specific ignores
 .idea/
+sql_catalog.iml
