@@ -1,1 +1,0 @@
-ALTER TABLE movie ALTER COLUMN rating TYPE real;
