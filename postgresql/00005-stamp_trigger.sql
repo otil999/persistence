@@ -17,7 +17,7 @@ BEGIN
       VALUES (
           -1 * OLD.id, '#' || OLD.id || '#' || OLD.name, OLD.original_name, OLD.counter, OLD.rating, OLD.release,
           OLD.link, OLD.media_id, OLD.media_number, OLD.series_id, OLD.series_num, OLD.genre_id, OLD.created,
-          OLD.updated, OLD.deleted, OLD.revision, OLD.storage_id);
+          OLD.updated, now(), OLD.revision, OLD.storage_id);
     RETURN OLD;
   END IF;
 END;
