@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+    <changeSet id="202105-drop-stamp-trigger" author="otil">
+        <sql>DROP FUNCTION stamp() CASCADE;</sql>
+    </changeSet>
+
+    <changeSet id="202105-revisions" author="otil">
+        <update tableName="media">
+            <column name="revision" value="0"/>
+        </update>
+        <update tableName="game">
+            <column name="revision" value="0"/>
+            <where>revision IS NULL</where>
+        </update>
+        <update tableName="movie">
+            <column name="revision" value="0"/>
+            <where>revision IS NULL</where>
+        </update>
+        <update tableName="series">
+            <column name="revision" value="0"/>
+        </update>
+        <update tableName="genre">
+            <column name="revision" value="0"/>
+        </update>
+        <update tableName="storage_type">
+            <column name="revision" value="0"/>
+        </update>
+        <update tableName="storage">
+            <column name="revision" value="0"/>
+        </update>
+        <addDefaultValue tableName="base" columnName="revision" defaultValue="0"/>
+        <addDefaultValue tableName="media" columnName="revision" defaultValue="0"/>
+        <addDefaultValue tableName="game" columnName="revision" defaultValue="0"/>
+        <addDefaultValue tableName="series" columnName="revision" defaultValue="0"/>
+        <addDefaultValue tableName="genre" columnName="revision" defaultValue="0"/>
+        <addDefaultValue tableName="storage_type" columnName="revision" defaultValue="0"/>
+        <addDefaultValue tableName="storage" columnName="revision" defaultValue="0"/>
+        <addNotNullConstraint tableName="base" columnName="revision"/>
+        <addNotNullConstraint tableName="media" columnName="revision"/>
+        <addNotNullConstraint tableName="game" columnName="revision"/>
+        <addNotNullConstraint tableName="series" columnName="revision"/>
+        <addNotNullConstraint tableName="genre" columnName="revision"/>
+        <addNotNullConstraint tableName="storage_type" columnName="revision"/>
+        <addNotNullConstraint tableName="storage" columnName="revision"/>
+    </changeSet>
+
+</databaseChangeLog>
