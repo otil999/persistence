@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+    <changeSet id="202108-drop-media-id-references" author="otil">
+        <dropForeignKeyConstraint baseTableName="movie" constraintName="movie_media_id_fkey"/>
+        <dropForeignKeyConstraint baseTableName="game" constraintName="game_media_id_fkey"/>
+        <dropNotNullConstraint tableName="movie" columnName="media_id"/>
+        <dropNotNullConstraint tableName="game" columnName="media_id"/>
+    </changeSet>
+
+</databaseChangeLog>
