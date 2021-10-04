@@ -1,5 +1,6 @@
-package hu.otilsoft.catalog
+package hu.otilsoft.catalog.models
 
+import io.swagger.v3.oas.annotations.media.Schema
 import java.time.LocalDateTime
 import javax.persistence.*
 
@@ -8,24 +9,37 @@ import javax.persistence.*
 abstract class AbstractEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @field:Schema(description = "id of the entity", example = "1")
     var id: Long = 0L
 
     @Version
+    @field:Schema(description = "revision of the entity", example = "5")
     val revision: Int = 0
 
     @Column(insertable = false, updatable = false)
+    @field:Schema(description = "time when the entity has been created", type = "string", example = "2021-02-17 22:45:56")
     val created: LocalDateTime = LocalDateTime.now()
+
+    @Column(insertable = false, updatable = false)
+    @field:Schema(description = "time when the entity has been updated", type = "string", example = "2021-02-17 22:45:56")
     var updated: LocalDateTime? = null
+
     var deleted: LocalDateTime? = null
 }
 
 
 @Entity(name = "storage_type")
-data class StorageType(var name: String = "") : AbstractEntity()
+data class StorageType(
+    @field:Schema(description = "name of storage type", example = "DVD")
+    var name: String = ""
+) : AbstractEntity()
 
 
 @Entity
-data class Genre(var name: String = "") : AbstractEntity()
+data class Genre(
+    @field:Schema(description = "name of genre", example = "thriller")
+    var name: String = ""
+) : AbstractEntity()
 
 
 @Entity
