@@ -1,5 +1,6 @@
-package hu.otilsoft.catalog.models
+package hu.otilsoft.catalog.model
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import io.swagger.v3.oas.annotations.media.Schema
 import java.time.LocalDateTime
 import javax.persistence.*
@@ -46,9 +47,11 @@ data class Genre(
 data class Series(
     var name: String = "",
 
+    @JsonIgnoreProperties("series")
     @OneToMany(mappedBy = "series", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     var games: List<Game> = emptyList(),
 
+    @JsonIgnoreProperties("series")
     @OneToMany(mappedBy = "series", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     var movies: List<Movie> = emptyList(),
 ) : AbstractEntity()
@@ -64,7 +67,7 @@ data class Storage(
 
     @ManyToOne
     @JoinColumn(name = "storage_type_id", referencedColumnName = "id")
-    var storageType: StorageType? = null
+    var storageType: StorageType? = null,
 ) : AbstractEntity()
 
 
