@@ -2,6 +2,7 @@ package hu.otilsoft.catalog.model
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import io.swagger.v3.oas.annotations.media.Schema
+import java.time.LocalDate
 import java.time.LocalDateTime
 import javax.persistence.*
 
@@ -92,6 +93,7 @@ data class Movie(
     var storage: Storage? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "series_id")
     var series: Series? = null,
 
     @Column(name = "series_num")
@@ -119,6 +121,7 @@ data class Game(
     var storage: Storage? = null,
 
     @ManyToOne
+    @JoinColumn(name = "series_id")
     var series: Series? = null,
 
     @Column(name = "series_num")
@@ -133,3 +136,15 @@ data class Game(
 ) : AbstractEntity() {
     fun isBelongToSeries() = series != null
 }
+
+
+@Entity
+@Table(name = "count_history")
+data class CountHistory(
+    @Id
+    var date: LocalDate = LocalDate.now(),
+    @Column(name = "active_movies")
+    var activeMovies: Int = 0,
+    @Column(name = "active_games")
+    var activeGames: Int = 0
+)
