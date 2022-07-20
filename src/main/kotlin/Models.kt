@@ -18,11 +18,11 @@ abstract class AbstractEntity {
     @field:Schema(description = "revision of the entity", example = "5")
     val revision: Int = 0
 
-    @Column(insertable = false, updatable = false)
+    @Column(updatable = false)
     @field:Schema(description = "time when the entity has been created", type = "string", example = "2021-02-17 22:45:56")
     val created: LocalDateTime = LocalDateTime.now()
 
-    @Column(insertable = false, updatable = false)
+    @Column(insertable = false)
     @field:Schema(description = "time when the entity has been updated", type = "string", example = "2021-02-17 22:45:56")
     var updated: LocalDateTime? = null
 
