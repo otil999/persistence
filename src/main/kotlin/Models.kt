@@ -100,7 +100,10 @@ data class Movie(
     var seriesNum: Int? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    var genre: Genre? = null
+    var genre: Genre? = null,
+
+    @Column(name = "last_viewed")
+    var lastViewed: LocalDateTime? = null
 ) : AbstractEntity() {
     fun isBelongToSeries() = series != null
 }
@@ -132,7 +135,10 @@ data class Game(
 
     @Column(name = "long_term")
     var longTerm: Boolean? = null,
-    var description: String? = null
+    var description: String? = null,
+
+    @Column(name = "last_played")
+    var lastPlayed: LocalDateTime? = null
 ) : AbstractEntity() {
     fun isBelongToSeries() = series != null
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+    <changeSet id="202209-add-last-played-viewed" author="otil">
+        <addColumn tableName="game">
+            <column name="last_played" type="timestamp"/>
+        </addColumn>
+        <addColumn tableName="movie">
+            <column name="last_viewed" type="timestamp"/>
+        </addColumn>
+    </changeSet>
+
+</databaseChangeLog>
