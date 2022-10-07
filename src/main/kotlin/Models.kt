@@ -26,6 +26,7 @@ abstract class AbstractEntity {
     @field:Schema(description = "time when the entity has been updated", type = "string", example = "2021-02-17 22:45:56")
     var updated: LocalDateTime? = null
 
+    @Transient
     var deleted: LocalDateTime? = null
 }
 
@@ -59,10 +60,6 @@ data class Series(
 
 
 @Entity
-data class Media(var name: String = "") : AbstractEntity()
-
-
-@Entity
 data class Storage(
     var name: String = "",
 
@@ -82,9 +79,6 @@ data class Movie(
     var release: Int? = null,
     var rating: Double? = null,
     var counter: Int = 0,
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    var media: Media? = null,
 
     @Column(name = "media_number")
     var mediaNumber: Int? = null,
@@ -116,9 +110,6 @@ data class Game(
     var rating: Double? = null,
     var release: Int? = null,
     var link: String? = null,
-
-    @ManyToOne
-    var media: Media? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
     var storage: Storage? = null,
